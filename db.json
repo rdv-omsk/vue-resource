@@ -29,6 +29,11 @@
       "name": "Toyota",
       "year": 2018,
       "id": 6
+    },
+    {
+      "name": "Nissan",
+      "year": 2017,
+      "id": 7
     }
   ]
 }
