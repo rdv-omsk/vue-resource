@@ -11,6 +11,20 @@
     </div>
 
     <button class="btn btn-success" @click="createCar">Create car</button>
+    <button class="btn btn-primary" @click="loadCars">Load cars</button>
+
+    <hr>
+
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        v-for="car of cars"
+        :key="car.id"
+      >
+        <strong>{{ car.name }}</strong> - {{ car.year }}
+      </li>
+
+    </ul>
 
   </div>
 </template>
@@ -21,7 +35,8 @@
     data () {
       return {
         carName: '',
-        carYear: 2018
+        carYear: 2018,
+        cars: []
       }
     },
     methods: {
@@ -32,12 +47,21 @@
         }
 
         this.$http.post('http://localhost:3000/cars', car)
-        .then(response => {
-          return response.json()
-        })
-        .then(newCar => {
-          console.log(newCar)
-        })
+          .then(response => {
+            return response.json()
+          })
+          .then(newCar => {
+            console.log(newCar)
+          })
+      },
+      loadCars () {
+        this.$http.get('http://localhost:3000/cars')
+          .then(response => {
+            return response.json()
+          })
+          .then(cars => {
+            this.cars = cars
+          })
       }
     }
   }
